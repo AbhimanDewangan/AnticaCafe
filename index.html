@@ -1,78 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antica Cafe Inventory</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
 <body>
 
 <div class="container">
 
-    <header>
-        <h1>☕ Antica Inventory Dashboard</h1>
-        <p>Manage cafe stock efficiently</p>
-    </header>
+<header>
+    <h1>☕ Antica Cafe Inventory</h1>
+    <p>Inventory Management Dashboard</p>
+</header>
 
-    <section class="dashboard">
+<div class="dashboard">
 
-        <div class="card">
-            <h3>Total Products</h3>
-            <p id="totalProducts">0</p>
-        </div>
+    <div class="card">
+        <h3>Total Products</h3>
+        <p id="totalProducts">0</p>
+    </div>
 
-        <div class="card">
-            <h3>Low Stock</h3>
-            <p id="lowStock">0</p>
-        </div>
+    <div class="card">
+        <h3>Low Stock</h3>
+        <p id="lowStock">0</p>
+    </div>
 
-        <div class="card">
-            <h3>Out of Stock</h3>
-            <p id="outStock">0</p>
-        </div>
+    <div class="card">
+        <h3>Out of Stock</h3>
+        <p id="outStock">0</p>
+    </div>
 
-        <div class="card">
-            <h3>Inventory Value</h3>
-            <p id="inventoryValue">OMR 0</p>
-        </div>
+    <div class="card">
+        <h3>Inventory Value</h3>
+        <p id="inventoryValue">OMR 0</p>
+    </div>
 
-    </section>
+</div>
 
-    <div class="inventory-panel">
+<div class="inventory-box">
 
-        <div class="controls">
-
-            <input id="name" placeholder="Product Name">
-
-            <input id="qty" type="number" placeholder="Quantity">
-
-            <input id="price" type="number" placeholder="Unit Price">
-
-            <button onclick="addItem()">
-                Add Product
-            </button>
-
-        </div>
+    <div class="controls">
 
         <input
-            id="search"
-            class="search"
-            placeholder="🔍 Search products..."
-            onkeyup="renderTable()">
+        type="text"
+        id="name"
+        placeholder="Product Name">
 
-        <table>
+        <input
+        type="number"
+        id="qty"
+        placeholder="Quantity">
 
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <input
+        type="number"
+        id="price"
+        placeholder="Unit Price">
 
-            <tbody id="inventoryTable"></tbody>
-
-        </table>
+        <button onclick="addItem()">
+            Add Product
+        </button>
 
     </div>
+
+    <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="🔍 Search inventory..."
+    onkeyup="renderTable()">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="inventoryTable"></tbody>
+
+    </table>
+
+</div>
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
+</html>
