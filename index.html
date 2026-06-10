@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Antica Cafe Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>☕ Antica Cafe Inventory Dashboard</h1>
+
+<div class="dashboard">
+
+    <div class="card">
+        <h3>Total Products</h3>
+        <p id="totalProducts">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Low Stock</h3>
+        <p id="lowStock">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Out Of Stock</h3>
+        <p id="outStock">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Inventory Value</h3>
+        <p id="inventoryValue">OMR 0</p>
+    </div>
+
+</div>
+
+<div class="controls">
+
+    <input type="text" id="name" placeholder="Product Name">
+
+    <input type="number" id="qty" placeholder="Quantity">
+
+    <input type="number" id="price" placeholder="Unit Price">
+
+    <button onclick="addItem()">Add Item</button>
+
+</div>
+
+<input
+    type="text"
+    id="search"
+    placeholder="Search products..."
+    onkeyup="renderTable()">
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody id="inventoryTable"></tbody>
+
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
