@@ -10,17 +10,17 @@ function saveData(){
 
 function addItem(){
 
-    const name =
-    document.getElementById("name").value;
+    let name =
+    document.getElementById("name").value.trim();
 
-    const qty =
+    let qty =
     parseInt(document.getElementById("qty").value);
 
-    const price =
+    let price =
     parseFloat(document.getElementById("price").value);
 
     if(!name || isNaN(qty) || isNaN(price)){
-        alert("Fill all fields");
+        alert("Please fill all fields.");
         return;
     }
 
@@ -30,19 +30,61 @@ function addItem(){
         price
     });
 
+    document.getElementById("name").value="";
+    document.getElementById("qty").value="";
+    document.getElementById("price").value="";
+
     saveData();
     renderTable();
 }
 
 function getStatus(qty){
 
-    if(qty === 0)
+    if(qty===0)
         return "Out";
 
-    if(qty <= 5)
+    if(qty<=5)
         return "Low";
 
     return "Good";
+}
+
+function increaseQty(index){
+
+    inventory[index].qty++;
+
+    saveData();
+    renderTable();
+}
+
+function decreaseQty(index){
+
+    if(inventory[index].qty>0){
+        inventory[index].qty--;
+    }
+
+    saveData();
+    renderTable();
+}
+
+function updateQty(index,value){
+
+    inventory[index].qty =
+    parseInt(value) || 0;
+
+    saveData();
+    renderTable();
+}
+
+function deleteItem(index){
+
+    if(confirm("Delete item?")){
+
+        inventory.splice(index,1);
+
+        saveData();
+        renderTable();
+    }
 }
 
 function renderTable(){
@@ -55,11 +97,11 @@ function renderTable(){
     let table =
     document.getElementById("inventoryTable");
 
-    table.innerHTML = "";
+    table.innerHTML="";
 
-    let totalValue = 0;
-    let low = 0;
-    let out = 0;
+    let low=0;
+    let out=0;
+    let totalValue=0;
 
     inventory
     .filter(item =>
@@ -79,18 +121,57 @@ function renderTable(){
 
         table.innerHTML += `
         <tr>
+
             <td>${item.name}</td>
-            <td>${item.qty}</td>
-            <td>${item.price}</td>
-            <td class="${status.toLowerCase()}">
-                ${status}
-            </td>
+
             <td>
-                <button onclick="deleteItem(${index})">
-                    Delete
-                </button>
+
+                <div class="qty-controls">
+
+                    <button
+                    class="qty-btn"
+                    onclick="decreaseQty(${index})">
+                    -
+                    </button>
+
+                    <input
+                    class="qty-input"
+                    type="number"
+                    value="${item.qty}"
+                    onchange="updateQty(${index},this.value)">
+
+                    <button
+                    class="qty-btn"
+                    onclick="increaseQty(${index})">
+                    +
+                    </button>
+
+                </div>
+
             </td>
-        </tr>`;
+
+            <td>
+                OMR ${item.price.toFixed(2)}
+            </td>
+
+            <td>
+                <span class="status ${status.toLowerCase()}">
+                ${status}
+                </span>
+            </td>
+
+            <td>
+
+                <button
+                class="delete-btn"
+                onclick="deleteItem(${index})">
+                Delete
+                </button>
+
+            </td>
+
+        </tr>
+        `;
     });
 
     document.getElementById("totalProducts")
@@ -105,14 +186,6 @@ function renderTable(){
     document.getElementById("inventoryValue")
     .innerText =
     "OMR " + totalValue.toFixed(2);
-}
-
-function deleteItem(index){
-
-    inventory.splice(index,1);
-
-    saveData();
-    renderTable();
 }
 
 renderTable();
